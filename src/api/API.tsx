@@ -7,6 +7,7 @@ const searchGithub = async () => {
       {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+          'User-Agent': 'CandidateSearch',
         },
       }
     );
