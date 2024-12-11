@@ -9,3 +9,4 @@ interface Candidate {
     company: string;
   }
   
+export default Candidate;

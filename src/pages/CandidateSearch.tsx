@@ -1,22 +1,9 @@
 import { useState, useEffect } from 'react';
 import { searchGithub, searchGithubUser } from '../api/API';
-
-interface Candidate {
-  name: string;
-  username: string;
-  location: string;
-  avatar_url: string;
-  email: string;
-  html_url: string;
-  company: string;
-}
+import Candidate from '../interfaces/Candidate.interface';
 
 const CandidateSearch = () => {
-  // State for current candidate data
   const [currentCandidate, setCurrentCandidate] = useState<Candidate | null>(null);
-  // State for saved candidates
-  const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
-  // State for loading and error
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
@@ -27,7 +14,7 @@ const CandidateSearch = () => {
     try {
       const users = await searchGithub();
       if (users.length > 0) {
-        loadCandidateDetails(users[0].login); // Load the first user's details
+        await loadCandidateDetails(users[0].login); // Load the first user's details
       } else {
         setError('No candidates available.');
       }
@@ -56,21 +43,23 @@ const CandidateSearch = () => {
     }
   };
 
-  // Save the current candidate and load the next one
+  // Save the current candidate to localStorage and fetch the next one
   const saveCandidate = () => {
     if (currentCandidate) {
-      setSavedCandidates((prev) => [...prev, currentCandidate]);
+      const savedCandidates = JSON.parse(localStorage.getItem('savedCandidates') || '[]');
+      savedCandidates.push(currentCandidate); // Add the new candidate
+      localStorage.setItem('savedCandidates', JSON.stringify(savedCandidates));
     }
-    fetchCandidates();
+    fetchCandidates(); // Load the next candidate
   };
 
-  // Skip the current candidate and load the next one
+  // Skip the current candidate and fetch the next one
   const skipCandidate = () => {
     fetchCandidates();
   };
 
   useEffect(() => {
-    fetchCandidates();
+    fetchCandidates(); // Fetch candidates when the component mounts
   }, []);
 
   if (loading) return <p>Loading candidates...</p>;
@@ -95,22 +84,6 @@ const CandidateSearch = () => {
           <button onClick={skipCandidate}>- Skip</button>
         </div>
       </div>
-
-      <h2>Saved Candidates</h2>
-      {savedCandidates.length > 0 ? (
-        <ul>
-          {savedCandidates.map((candidate, index) => (
-            <li key={index}>
-              <p><strong>{candidate.name}</strong> ({candidate.username})</p>
-              <a href={candidate.html_url} target="_blank" rel="noopener noreferrer">
-                Profile Link
-              </a>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No candidates saved yet.</p>
-      )}
     </div>
   );
 };

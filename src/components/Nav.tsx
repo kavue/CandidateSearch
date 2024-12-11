@@ -7,7 +7,7 @@ const Nav = () => {
       <ul className="nav-list">
         <li className="nav-item">
           <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            Search Candidates
+            Home
           </NavLink>
         </li>
         <li className="nav-item">
