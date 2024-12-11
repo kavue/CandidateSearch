@@ -80,8 +80,8 @@ const CandidateSearch = () => {
           View Profile
         </a>
         <div className="candidate-actions">
-          <button onClick={saveCandidate}>+ Save</button>
-          <button onClick={skipCandidate}>- Skip</button>
+          <button onClick={saveCandidate} className="green">+</button>
+          <button onClick={skipCandidate} className="red">-</button>
         </div>
       </div>
     </div>

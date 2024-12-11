@@ -118,3 +118,73 @@ tbody tr:nth-child(odd) {
   width: 80vw;
   table-layout: fixed;
 }
+
+.candidates-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1.5em;
+  border: 1px solid #ddd;
+}
+
+.candidates-table thead tr {
+  background-color: black;
+  text-align: left;
+}
+
+.candidates-table th,
+.candidates-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.candidates-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.candidates-table tbody tr:nth-of-type(even) {
+  background-color: black;
+}
+
+.candidates-table a {
+  color: #646cff;
+  text-decoration: none;
+}
+
+.candidates-table a:hover {
+  text-decoration: underline;
+}
+
+.candidate-actions button {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px; /* Centers the text vertically */
+}
+
+.candidate-actions button.green {
+  background-color: #28a745; /* Green color */
+}
+
+.candidate-actions button.green:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.candidate-actions button.red {
+  background-color: #dc3545; /* Red color */
+}
+
+.candidate-actions button.red:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.candidate-actions button:focus {
+  outline: none; /* Removes the outline on focus */
+}

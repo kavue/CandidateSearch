@@ -14,21 +14,38 @@ const SavedCandidates = () => {
       {savedCandidates.length === 0 ? (
         <p>No candidates saved.</p>
       ) : (
-        <ul>
-          {savedCandidates.map((candidate, index) => (
-            <li key={index}>
-              <img src={candidate.avatar_url} alt={candidate.username} width={50} />
-              <h3>{candidate.name}</h3>
-              <p><strong>Username:</strong> {candidate.username}</p>
-              <p><strong>Location:</strong> {candidate.location}</p>
-              <p><strong>Email:</strong> {candidate.email}</p>
-              <p><strong>Company:</strong> {candidate.company}</p>
-              <a href={candidate.html_url} target="_blank" rel="noopener noreferrer">
-                View Profile
-              </a>
-            </li>
-          ))}
-        </ul>
+        <table className="candidates-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Location</th>
+              <th>Email</th>
+              <th>Company</th>
+              <th>Profile</th>
+            </tr>
+          </thead>
+          <tbody>
+            {savedCandidates.map((candidate: any, index: number) => (
+              <tr key={index}>
+                <td>
+                  <img src={candidate.avatar_url} alt={candidate.username} width={50} />
+                </td>
+                <td>{candidate.name}</td>
+                <td>{candidate.username}</td>
+                <td>{candidate.location}</td>
+                <td>{candidate.email || 'Not provided'}</td>
+                <td>{candidate.company}</td>
+                <td>
+                  <a href={candidate.html_url} target="_blank" rel="noopener noreferrer">
+                    View Profile
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );
